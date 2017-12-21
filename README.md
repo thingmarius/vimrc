@@ -1,2 +1,3 @@
 # vimrc
-vim-config
+My vim configuration files
+
