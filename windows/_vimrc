@@ -1,33 +1,43 @@
-filetype off
+filetype on
 set nocompatible
+set shellslash
 
 " set the runtime path to include Vundle and initialize
-set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
-call vundle#begin('$USERPROFILE/vimfiles/bundle/')
+set rtp+=~/vimfiles/bundle/Vundle.vim
+call vundle#begin('~/vimfiles/bundle')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'lifepillar/vim-solarized8'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tpope/vim-fugitive'
-Plugin 'alfredodeza/coveragepy.vim'
-Plugin 'scrooloose/syntastic'
+" Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-repeat'
+" Plugin 'tpope/vim-speeddating'
+" Plugin 'tpope/vim-surround'
+" Plugin 'airblade/vim-gitgutter'
 " Plugin 'alfredodeza/pytest.vim'
+" Plugin 'alfredodeza/coveragepy.vim'
+
+" Asynchronous Lint Engine
+" Plugin 'dense-analysis/ale'
+
 " Plugin 'tpope/vim-obsession'
 " Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on
 
-" call glaive#Install()
-" Glaive coverage plugin[mappings]
+filetype plugin indent on
 
 " syntax highlighting
 syntax enable
+
+" colorscheme
+set termguicolors
+colorscheme solarized8
+set background=dark
 
 " tabs configuration
 set tabstop=4
@@ -35,11 +45,6 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
-" UI config
-if has('gui_running')
-    colorscheme solarized
-    set guifont=Lucida_Console:h10:cANSI
-endif
 " Allow hidden buffers, don't limit to 1 file per window/split
 set hidden
 
@@ -48,7 +53,6 @@ set scrolloff=3
 set autoindent
 set showmode
 set showcmd
-set hidden
 set wildmenu              " autocomplete in command bar menu
 set wildmode=list:longest " autocomplete in command bar menu
 set visualbell
@@ -74,7 +78,7 @@ vnoremap <tab> %
 " Handle long lines better
 set wrap
 set textwidth=79
-set formatoptions=qrn1
+set formatoptions=tcrq1j
 set colorcolumn=80
 
 " Show invisible characters
@@ -112,23 +116,13 @@ inoremap <right> <nop>
 
 " map <leader>cd to change working directory to the folder of the current file
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+
+"
+" Plugin configurations
+"
+
+" NERDTree
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
-nnoremap <silent> <F9> :update \| SyntasticCheck<CR>
 
-" Settings for the 'Syntastic' plugin
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-nnoremap <silent> <C-<> :lprevious<CR>
-nnoremap <silent> <C-\>> :lnext<CR>
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_check_on_w = 0
-
-" Disable automatic checks by Syntastic
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-let g:syntastic_python_python_exec = '.venv/Scripts/python.exe'
-let g:syntastic_python_checkers = ['pylint']
+" Vim GitGutter https://github.com/airblade/vim-gitgutter
+set updatetime=100
